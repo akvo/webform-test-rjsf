@@ -4,25 +4,25 @@ import { Container, Row, Col } from "react-bootstrap";
 
 function App() {
   const [formData, setFormData] = useState(null);
-  const cascade = {
-    blank: {
-      type: "string",
-      enum: ["Other"],
-      enumNames: ["Other"],
-    },
-    country: {
-      type: "string",
-      enum: ["DE", "IT", "JP", "US", "Other"],
-      enumNames: ["Deutch", "Italia", "Japan", "United State", "Other"],
-    },
-    US: {
-      type: "string",
-      enum: ["AZ", "CA", "NY"],
-      enumNames: ["Arizona", "California", "New York"],
-    },
-  };
+  // const cascade = {
+  //   blank: {
+  //     type: "string",
+  //     enum: ["Other"],
+  //     enumNames: ["Other"],
+  //   },
+  //   country: {
+  //     type: "string",
+  //     enum: ["DE", "IT", "JP", "US", "Other"],
+  //     enumNames: ["Deutch", "Italia", "Japan", "United State", "Other"],
+  //   },
+  //   US: {
+  //     type: "string",
+  //     enum: ["AZ", "CA", "NY"],
+  //     enumNames: ["Arizona", "California", "New York"],
+  //   },
+  // };
 
-  const schema = {
+  /*const schema = {
     type: "object",
     description: "This is Example Form",
     definitions: cascade,
@@ -80,9 +80,99 @@ function App() {
         required: ["name"],
       },
     },
+  };*/
+
+  //issue: questions don't seem to be ordered
+  const schema = {
+    title: "Form title",
+    description: "Form description",
+    type: "object",
+    properties: {
+      group1: {
+        type: "object",
+        title: "group1",
+        properties: {
+          required: ["123456", "1234567", "567890"],
+          123456: { type: "string", title: "1. Title", default: "A new task" },
+          546785: { type: "boolean", title: "2. Done", default: false },
+          567890: { type: "string", title: "3. date", format: "date" }
+        }
+      },
+      group2: {
+        type: "object",
+        title: "group2",
+        properties: {
+          required: ["123897"],
+          123897: {
+            title: "Repeated question group with 2 questions",
+            description: "Press the blue add button to add responses, the red one to delete iteration",
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                123654789: {
+                  title: "1. Name of pet",
+                  type: "string",
+                  default: "Bethoven"
+                },
+                1236547895: {
+                  title: "2. Age of pet",
+                  type: "string",
+                  default: "2"
+                },
+                7236547895: {
+                  title: "3. Type",
+                  type: "string",
+                  default: "Cat",
+                  enum: [
+                    "Cat",
+                    "Dog",
+                    "Snake"
+                  ],
+                  enumNames: [
+                    "Cat",
+                    "Dog",
+                    "Snake"
+                  ]
+                }
+              }
+            }
+          },
+          123: {
+            type: "object",
+            title: "Dependent questions made different",
+            anyOf: [
+              {
+                title: "First method of identification",
+                properties: {
+                  firstName: {
+                    type: "string",
+                    title: "First name",
+                    default: "Chuck"
+                  },
+                  lastName: {
+                    type: "string",
+                    title: "Last name"
+                  }
+                }
+              },
+              {
+                title: "Second method of identification",
+                properties: {
+                  idCode: {
+                    type: "string",
+                    title: "ID code"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
   };
 
-  const uiSchema = {
+ /* const uiSchema = {
     questionGroup1: {
       classNames: "custom-class-name",
       birthDate: { "ui:widget": "date", classNames: "test" },
@@ -91,8 +181,8 @@ function App() {
         "ui:help": "Please Type",
       },
     },
-  };
-
+  };*/
+  const uiSchema = {};
   return (
     <Container>
       <Row>
