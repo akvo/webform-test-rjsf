@@ -82,7 +82,7 @@ function App() {
     },
   };*/
 
-  //issue: questions don't seem to be ordered
+  //issue: questions don't seem to be ordered as expected
   const schema = {
     title: "Form title",
     description: "Form description",
@@ -95,7 +95,12 @@ function App() {
           required: ["123456", "1234567", "567890"],
           123456: { type: "string", title: "1. Title", default: "A new task" },
           546785: { type: "boolean", title: "2. Done", default: false },
-          567890: { type: "string", title: "3. date", format: "date" }
+          567890: { type: "string", title: "3. date", format: "date" },
+          231456: {
+            "type": "string",
+            "format": "data-url",
+            "title": "We only accept .png files"
+          }
         }
       },
       group2: {
@@ -182,7 +187,15 @@ function App() {
       },
     },
   };*/
-  const uiSchema = {};
+  const uiSchema = {
+    group1: {
+      231456 : {
+        "ui:options": {
+          "accept": [".png", ".jpg"]
+        }
+      }
+    }
+  };
   return (
     <Container>
       <Row>
